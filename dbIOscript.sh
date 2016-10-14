@@ -5,7 +5,7 @@ MYSQLUSER="testuser"
 MYSQLPASS="pass"
  
 #File name with date only
-DATE=$(date + "%F")
+DATE=$(date)
  
 #File location
 FILE="/tmp/Usage_Report_$DATE.csv"
