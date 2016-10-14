@@ -7,19 +7,16 @@ MYSQLPASS="pass"
 #File name with date only
 DATE=$(date)
  
-#File location
-FILE="/tmp/out/Usage_Report.csv"
- 
+
 MYSQLOPTS="--password=${MYSQLPASS}"
  
 #testing purposes, give echo output
 echo "Report Begin: $(date)"
 
- 
 mysql ${MYSQLOPTS} << EOFMYSQL
 USE sys
 EOFMYSQL
-mysql -ppass sys -e "select table_name, io_read, io_write from schema_table_statistics where table_schema='employees' order by io_read, io_write" | sed 's/\t/","/g;s/^/"/;s/$/"/;' >  sample.csv  
+mysql -ppass sys -e "select table_name, io_read, io_write from schema_table_statistics where table_schema='employees' order by io_read, io_write" |sed 's/\t/","/g;s/^/"/;s/$/"/;s/\n//g' >  sample.csv  
 
 #INTO OUTFILE '$FILE' FIELDS TERMINATED BY ',' 
 #LINES TERMINATED BY '\n';
