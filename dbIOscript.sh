@@ -8,7 +8,7 @@ MYSQLPASS="pass"
 DATE=$(date)
  
 #File location
-FILE="/tmp/Usage_Report_$DATE.csv"
+FILE="/tmp/out/Usage_Report.csv"
  
 MYSQLOPTS="--password=${MYSQLPASS}"
  
@@ -18,10 +18,12 @@ echo "Report Begin: $(date)"
  
 mysql ${MYSQLOPTS} << EOFMYSQL
 USE sys
-select table_name, io_read, io_write from schema_table_statistics where table_schema="employees" order by io_read, io_write;
-INTO OUTFILE '$FILE' FIELDS TERMINATED BY ','
-LINES TERMINATED BY '\n';
 EOFMYSQL
+mysql -ppass sys -e "select table_name, io_read, io_write from schema_table_statistics where table_schema='employees' order by io_read, io_write" | sed 's/\t/","/g;s/^/"/;s/$/"/;' >  sample.csv  
+
+#INTO OUTFILE '$FILE' FIELDS TERMINATED BY ',' 
+#LINES TERMINATED BY '\n';
+#EOFMYSQL
  
 #add column title to the report
 sed -i '1i User_Name,User_ID' $FILE
