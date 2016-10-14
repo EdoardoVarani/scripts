@@ -16,7 +16,7 @@ echo "Report Begin: $(date)"
 mysql ${MYSQLOPTS} << EOFMYSQL
 USE sys
 EOFMYSQL
-mysql -ppass sys -e "select table_name, io_read, io_write from schema_table_statistics where table_schema='employees' order by io_read, io_write" |sed 's/\t/","/g;s/^/"/;s/$/"/;s/\n//g' >  sample.csv  
+mysql -ppass sys -e "select table_schema.table_name, table_schema.io_read_requests, table_schema.io_write_requests from schema_table_statistics order by io_read_requests, io_write_requests" |sed 's/\t/","/g;s/^/"/;s/$/"/;s/\n//g' >  sample.csv  
 
 #INTO OUTFILE '$FILE' FIELDS TERMINATED BY ',' 
 #LINES TERMINATED BY '\n';
