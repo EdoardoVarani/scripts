@@ -1,0 +1,7 @@
+"table_name","io_read","io_write"
+"departments","1.21 KiB","212.60 KiB"
+"salaries","1.25 KiB","199.36 MiB"
+"dept_manager","1.30 KiB","212.65 KiB"
+"dept_emp","1.30 KiB","40.66 MiB"
+"titles","1.35 KiB","45.75 MiB"
+"employees","3.94 MiB","35.93 MiB"
